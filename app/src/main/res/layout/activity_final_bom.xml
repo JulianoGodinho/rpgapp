@@ -5,11 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
     tools:context=".FinalBom">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="10"
         android:gravity="center"
         android:text="Parabéns guerreiro!"
         android:textSize="24sp" />
@@ -17,22 +22,25 @@
     <VideoView
         android:id="@+id/vdvTrofeu"
         android:layout_width="wrap_content"
-        android:layout_height="500dp" />
+        android:layout_height="0dp"
+        android:layout_weight="70" />
 
     <Button
         android:id="@+id/btnSair"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_weight="10"
         android:text="Sair" />
 
     <Button
         android:id="@+id/btnReiniciar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_weight="10"
         android:text="Reiniciar" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

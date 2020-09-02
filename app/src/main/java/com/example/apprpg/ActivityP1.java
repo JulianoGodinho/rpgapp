@@ -103,10 +103,10 @@ public class ActivityP1 extends AppCompatActivity {
             }
         });
 
-        //Sensor
+        //Pegando os sensores pro tipo
         sLuminosidade = MainActivity.mSensores.getDefaultSensor(Sensor.TYPE_LIGHT);
         sAcelerometro = MainActivity.mSensores.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
+        //Vinculando os sensores com suas classes
         MainActivity.mSensores.registerListener(
                 new Luminosidade(),
                 sLuminosidade,
@@ -129,19 +129,20 @@ public class ActivityP1 extends AppCompatActivity {
             double y = event.values[1];
             double z = event.values[2];
 
-            if(x<-20||x>20){
+            if(x<-15||x>25){
                 sacudidasX++;
             }
 
-            if(y<0||y>30){
+            if(y<-10||y>20){
                 sacudidasY++;
             }
+            //Habilitando um novo ataque atraves dos sensores e mudando o nome dos buttons
             if(sacudidasY>=10){
-                btnAtaqueChifrada.setText("Chifrada melhorada");
+                btnAtaqueInvestida.setText("Investida Melhorada");
             }
 
             if (sacudidasX >=10){
-                btnAtaqueInvestida.setText("Investida Melhorada");
+                btnAtaqueChifrada.setText("Chifrada melhorada");
             }
         }
 
@@ -157,7 +158,7 @@ public class ActivityP1 extends AppCompatActivity {
         public void onSensorChanged(SensorEvent event) {
             double lux = event.values[0];
             vLuminosidade = lux;
-
+            //habilitando novo ataque e mudando as cores de background e dos textview
             if(lux <= 2){
                 layoutPrincipal.setBackgroundColor(Color.BLACK);
                 txtBoss.setTextColor(Color.WHITE);
@@ -192,14 +193,15 @@ public class ActivityP1 extends AppCompatActivity {
 
     }
 
-
+//criando um ataque sorteado com chance de critico e erro,verificando o sensor para habilitar novo ataque,
+    //escolhendo o video,narrando o txt com o dano causado
     private void ataqueInvestidaPersonagem() {
 
         Random rd = new Random(new Date().getTime());
         controle++;
         int sorteado = rd.nextInt(10) + 1;
 
-        if (sacudidasX >=10){
+        if (sacudidasY >=10){
             if(sorteado == 1){
                 ataqueVideoPersonagem = 1;
                 txtInfoPersonagem.setText("O boss defendeu o ataque.");
@@ -217,7 +219,7 @@ public class ActivityP1 extends AppCompatActivity {
                 txtInfoPersonagem.setText("Dano critico melhorado. -1700");
                 narrar(txtInfoPersonagem.getText().toString());
             }
-            sacudidasX = 0;
+            sacudidasY = 0;
             btnAtaqueInvestida.setText("Investida");
         } else {
             if (sorteado == 1) {
@@ -239,6 +241,8 @@ public class ActivityP1 extends AppCompatActivity {
             }
         }
     }
+    //criando um ataque sorteado com chance de critico e erro,verificando o sensor para habilitar novo ataque,
+    //escolhendo o video,narrando o txt com o dano causado
 
     private void ataqueArremessoPersonagem() {
         Random rd = new Random(new Date().getTime());
@@ -280,12 +284,13 @@ public class ActivityP1 extends AppCompatActivity {
             }
         }
     }
-
+//criando um ataque sorteado com chance de critico e erro,verificando o sensor para habilitar novo ataque,
+    //escolhendo o video,narrando o txt com o dano causado
     private void ataqueChifradaPersonagem(){
         Random rd = new Random(new Date().getTime());
         int sorteado = rd.nextInt(10) + 1;
 
-        if (sacudidasY >=20){
+        if (sacudidasX >=10){
             if (sorteado == 1) {
                 ataqueVideoPersonagem = 3;
                 txtInfoPersonagem.setText("O boss defendeu o ataque.");
@@ -303,7 +308,7 @@ public class ActivityP1 extends AppCompatActivity {
                 txtInfoPersonagem.setText("Dano critico melhorado. -3000");
                 narrar(txtInfoPersonagem.getText().toString());
             }
-            sacudidasY = 0;
+            sacudidasX = 0;
             btnAtaqueChifrada.setText("Chifrada");
         } else {
             if (sorteado == 1) {
@@ -328,13 +333,17 @@ public class ActivityP1 extends AppCompatActivity {
         controle = 0;
     }
 
-
+//controlando a variavel para habilitar o ataque chifrada
     private void controleAtaques(){
 
         if (controle == 2) {
             btnAtaqueChifrada.setEnabled(true);
         }
+        if (controle > 2) {
+            controle = 0;
+        }
     }
+   //metodo sorteia qual sera o ataque do boss e seleciona o video
 
     private void ataqueBoss(){
 
@@ -354,6 +363,8 @@ public class ActivityP1 extends AppCompatActivity {
 
     }
 
+    //vincula o ataque com o video
+
     private void verificaVideoPersonagem(){
 
         if (ataqueVideoPersonagem == 1){
@@ -371,6 +382,7 @@ public class ActivityP1 extends AppCompatActivity {
         }
     }
 
+   //vincula o ataque com o video
     private void verificaVideoBoss(){
 
         btnAtaqueInvestida.setEnabled(false);
@@ -431,12 +443,16 @@ public class ActivityP1 extends AppCompatActivity {
         Toast.makeText(ActivityP1.this, "Você não pode voltar.", Toast.LENGTH_SHORT).show();
     }
 
-
+//recebe um parametro relacionado aos metodos de ataque
+// verifica o hp para abrir as janelas de vitoria ou derrota
+//usando o metodo onCompletion para sincronizar os videos
 
     private void jogar(int acao){
+        //desabilita os btn para não serem usados inumeras vezes
         btnAtaqueInvestida.setEnabled(false);
         btnAtaqueArremesso.setEnabled(false);
         btnAtaqueChifrada.setEnabled(false);
+        btnVoz.setEnabled(false);
 
         if(acao==1) ataqueInvestidaPersonagem();
         if(acao==2) ataqueArremessoPersonagem();
@@ -481,6 +497,7 @@ public class ActivityP1 extends AppCompatActivity {
                                 txtHpPersonagem.setText("HP " + hpPersonagem);
                                 btnAtaqueInvestida.setEnabled(true);
                                 btnAtaqueArremesso.setEnabled(true);
+                                btnVoz.setEnabled(true);
                                 controleAtaques();
 
                             }
@@ -530,5 +547,6 @@ public class ActivityP1 extends AppCompatActivity {
             }
         }
     }
+
 
 }

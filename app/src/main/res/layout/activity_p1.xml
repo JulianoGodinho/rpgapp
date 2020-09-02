@@ -106,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Voz" />
+            android:text="Voz"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnAtaqueInvestida"
@@ -114,7 +115,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Investida"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnAtaqueArremesso"
@@ -122,7 +124,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Arremesso"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnAtaqueChifrada"
@@ -130,7 +133,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Chifrada"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="10sp" />
     </LinearLayout>
 
 </android.widget.LinearLayout>

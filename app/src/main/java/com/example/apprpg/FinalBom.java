@@ -22,7 +22,7 @@ public class FinalBom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_bom);
-
+        getSupportActionBar().hide();
 
         vitoria = MediaPlayer.create(this, R.raw.vitoria);
         btnSair = findViewById(R.id.btnSair);

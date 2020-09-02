@@ -20,7 +20,7 @@ public class FinalRuim extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_ruim);
-
+        getSupportActionBar().hide();
 
         derrota = MediaPlayer.create(this, R.raw.derrota);
         btnSair = findViewById(R.id.btnSair);
